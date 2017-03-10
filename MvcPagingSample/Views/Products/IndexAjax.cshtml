@@ -1,0 +1,11 @@
+﻿@model IPagedList<MvcPagingSample.Models.Product>
+
+@{
+    ViewBag.Title = "IndexAjax";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div id="gridcontainer">
+    @Html.Partial("_ProductGrid", Model)
+</div>

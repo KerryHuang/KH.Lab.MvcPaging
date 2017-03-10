@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="25c99c4246a84c50a6ec80ca61dbb65a" Name="Diagram1">
+        <EntityTypeShape EntityType="OAuthTModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAuthTModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAuthTModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAuthTModel.AspNetUsers" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAuthTModel.Product" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAuthTModel.UserProductClickRate" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="OAuthTModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="OAuthTModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="OAuthTModel.FK_UserProductClickRate_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="OAuthTModel.FK_UserProductClickRate_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="OAuthTModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

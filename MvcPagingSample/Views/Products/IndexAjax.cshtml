@@ -9,3 +9,28 @@
 <div id="gridcontainer">
     @Html.Partial("_ProductGrid", Model)
 </div>
+
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            $('a').on('click', function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("Click")',
+                    data: { id: $(this).attr('id') },
+                    dataType: 'json',
+                    success: function (data) {
+
+                    },
+                    error: function (jqXHR) {
+                        alert("發生錯誤: " + jqXHR.status);
+                    }
+                })
+            });
+
+            $('.col-set').attr('style', 'display: table;width: 100%;');
+        });
+    </script>
+}

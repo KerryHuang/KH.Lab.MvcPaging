@@ -8,19 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using MvcPagingSample.Models;
 using MvcPaging;
+using Newtonsoft.Json;
 
 namespace MvcPagingSample.Controllers
 {
     public class ProductsController : Controller
     {
         private OAuthTEntities db = new OAuthTEntities();
-        private int DefaultPageSize = 10;
+        private int DefaultPageSize = 8;
 
         public List<Product> Product
         {
             get
             {
-                return this.db.Product.OrderBy(x => x.CreateTime).ToList();
+                return this.db.Product.OrderByDescending(x=> x.ClickRate).ThenByDescending(x => x.CreateTime).ToList();
             }
         }
 
@@ -144,6 +145,30 @@ namespace MvcPagingSample.Controllers
             db.Product.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult Click(Guid? id)
+        {
+            Dictionary<string, string> jo = new Dictionary<string, string>();
+            if (id == null)
+            {
+                jo.Add("Valid", "Fail");
+                //jo.Add("Msg", "請輸入產品ID編號.");
+                return Content(JsonConvert.SerializeObject(jo), "application/json");
+            }
+            Product product = db.Product.Find(id);
+            if (product == null)
+            {
+                jo.Add("Valid", "Fail");
+                //jo.Add("Msg", "查產品ID編號.");
+                return Content(JsonConvert.SerializeObject(jo), "application/json");
+            }
+            product.ClickRate += 1;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            jo.Add("Valid", "OK");
+            return Content(JsonConvert.SerializeObject(jo), "application/json");
         }
 
         protected override void Dispose(bool disposing)

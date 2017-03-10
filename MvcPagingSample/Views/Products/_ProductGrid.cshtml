@@ -1,31 +1,32 @@
 ﻿@model IPagedList<MvcPagingSample.Models.Product>
-<table class="grid">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ClickRate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().CreateTime)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ImageUrl)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ClickRate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().CreateTime)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -51,9 +52,25 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>*@
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-3">
+            <div class="form-group">
+                <a href="@Url.Action("Details", new{ id = item.Id })" id="@item.Id">
+                    <img src="@item.ImageUrl" title="@item.Description" id="@item.Id" />
+                </a>
+                <p style="height:50px;">@Html.ActionLink(item.Name, "Details", new { id = item.Id }, new { id = item.Id })</p>                
+                <p>NT$ <span>@Html.DisplayFor(modelItem => item.Price)</span></p>                
+            </div>
+        </div>
+    }
+</div>
+
 <div class="pager">
     @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount, new AjaxOptions { UpdateTargetId = "gridcontainer" }).Options(o => o.Action("AjaxPage"))
 </div>
